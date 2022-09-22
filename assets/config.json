@@ -1,0 +1,48 @@
+{
+	"botver": "3.0 (Beta Build 100)",
+	"release": 2,
+	"debugMode": 1,
+	"cmdCD": 7000,
+	"sugCD": 900000,
+	"enableMessageEdit": false,
+	"enableChannelEdit": false,
+	"configs":
+[
+	{
+		"dbConfig": {"server": "localhost\\SQLEXPRESS",
+		"user": "MCdba",
+		"password": "Comment678",
+		"database": "MCSS",
+		"options": {"enableArithAbort": false}},
+		"token": "NzkwMDc1Nzk2MDQyOTQwNDQ4.Gfni2-.lpUr73JRyr-JFs20kR0Yg513-SW10H2z4hg04M",
+		"supportServer": "799882620913319957",
+		"suggestionChannel": "799890506757963857",
+		"expressPort": 4889,
+		"liveQueuePause": 1000
+	},
+	{
+		"dbConfig": {"server": "localhost\\SQLEXPRESS",
+		"user": "MCbeta",
+		"password": "Comment678",
+		"database": "MCSS_BETA",
+		"options": {"enableArithAbort": false}},
+		"token": "NjUyNzI2MTA3NTM1MzEwODU5.G_UEoG.DiSiEC2BHAGefBVZUdxx3-KWlFg9DSVE48YJKQ",
+		"supportServer": "799882620913319957",
+		"suggestionChannel": "844819088499933204",
+		"expressPort": 4890,
+		"liveQueuePause": 1000
+	},
+	{
+		"dbConfig": {"server": "localhost\\SQLEXPRESS",
+		"user": "MCbeta",
+		"password": "Comment678",
+		"database": "MCSS_BETA",
+		"options": {"enableArithAbort": false, "trustServerCertificate": true}},
+		"token": "NjgxMzU1MDczMTc5MDkwOTY1.Xngc8g.9ATtVcd-iTw0oHUFTJ-TsUMuR2Q",
+		"supportServer": "690081112164139040",
+		"suggestionChannel": "795926682326401044",
+		"expressPort": 4891,
+		"liveQueuePause": 1000
+	}
+]
+}

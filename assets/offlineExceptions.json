@@ -1,0 +1,14 @@
+[
+{
+ "domain": "aternos.me",
+ "motd": "This server is offline."
+},
+{
+	"domain": "aternos.me",
+	"motd": "Server not found."
+},
+{
+	"domain": "minefort.com",
+	"motd": "Start your server at www.minefort.com"
+}
+]

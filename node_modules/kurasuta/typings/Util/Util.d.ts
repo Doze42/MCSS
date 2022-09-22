@@ -1,0 +1,10 @@
+import { ShardingManager } from '..';
+export declare const PRIMITIVE_TYPES: string[];
+export declare function chunk<T>(entries: T[], chunkSize: number): T[][];
+export declare function deepClone(source: any): any;
+export declare function isPrimitive(value: any): value is string | bigint | number | boolean;
+export declare function mergeDefault<T>(def: Record<string, any>, given?: Record<string, any>): T;
+export declare function isObject(input: any): any;
+export declare function sleep(duration: number): Promise<void>;
+export declare function calcShards(shards: number, guildsPerShard: number): number;
+export declare function startCluster(manager: ShardingManager): Promise<void>;
