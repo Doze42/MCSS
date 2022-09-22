@@ -148,7 +148,7 @@ servers,
 }
 ]; 
 
-const rest = new REST({ version: '10' }).setToken('NjUyNzI2MTA3NTM1MzEwODU5.G_UEoG.DiSiEC2BHAGefBVZUdxx3-KWlFg9DSVE48YJKQ');
+const rest = new REST({ version: '10' }).setToken('NzkwMDc1Nzk2MDQyOTQwNDQ4.Gfni2-.lpUr73JRyr-JFs20kR0Yg513-SW10H2z4hg04M');
 
 (async () => {
   try {
@@ -160,7 +160,7 @@ const rest = new REST({ version: '10' }).setToken('NjUyNzI2MTA3NTM1MzEwODU5.G_UE
   //    { body: commands },
   //  );
 	
-	await rest.put(Routes.applicationCommands('652726107535310859'),{ body: commands },);
+	await rest.put(Routes.applicationCommands('790075796042940448'),{ body: commands },);
 
 
     console.log('Successfully reloaded application (/) commands.');
