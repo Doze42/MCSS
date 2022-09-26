@@ -1,6 +1,7 @@
 {
 "cmdHandler": {
-	"interactionFailed": "An error occurred and the command failed to run. Please try again."
+	"interactionFailed": "An error occurred and the command failed to run. Please try again.",
+	"databaseAddFailed": "An error occured while loading the default configuration. Please try again."
 },
 "servers": {
 	"listHeading": "Saved servers for ",

@@ -28,6 +28,7 @@ const queryServer = require('./funcs/dummyAPI.js');
 const liveNotifier = require('./funcs/liveNotifier.js');
 const channelEdit = require('./funcs/channelEdit.js')
 const panelEdit = require('./funcs/panelEdit.js')
+const loadDefaults = require('./funcs/loadDefaults.js')
 
 global.staticImages = JSON.parse(fs.readFileSync("./assets/static_images.json")); //Base64 encoded images
 //Loads JSON string files from disk into memory
@@ -79,6 +80,9 @@ global.toConsole.info('Successfully logged in using Token ' + botConfig.release 
 client.on('interactionCreate', async function (interaction){
 try {
 	if(!interaction.isCommand()) return; //exits if not command
+	if(!(await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset.length){ //Adds new servers to database
+		try{await loadDefaults.addServer(interaction.guildId)}
+		catch(err){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.cmdHandler.databaseAddFailed, 'error', stringJSON)], ephemeral: true})}}
 	var userData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from USERS WHERE ID = ' + interaction.user.id)).recordset[0]
 	if (userData){
 		if (userData.BLACKLIST){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.permissions.blacklisted + userData.BLACKLIST_REASON, 'error', stringJSON)], ephemeral: true})}
