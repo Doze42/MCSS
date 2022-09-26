@@ -38,7 +38,7 @@ async function run(client, interaction, stringJSON){
 		var embedData = JSON.parse(dbData.EMBEDS).templates[JSON.parse(dbData.EMBEDS).default]
 		try {
 			var bufferSource = global.staticImages.pack;
-			var pingResults = await queryServer(serverIP, serverPort)
+			var pingResults = await queryServer(serverIP, parseInt(serverPort))
 			//console.log(embedData.thumbnailEnable)
 			if (pingResults.favicon){bufferSource = pingResults.favicon.split(';base64,').pop();}
 			var statEmbed = richEmbeds.statusEmbed({
