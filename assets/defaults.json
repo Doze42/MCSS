@@ -97,5 +97,10 @@
 			"statusPanel": false,
 			"checkPanel": false
 		}
-	}
+	},
+	"servers":{
+		"default": 0,
+		"servers": []
+	},
+	"live": []
 }
