@@ -1,5 +1,5 @@
 {
-	"botver": "3.0 (Beta Build 100)",
+	"botver": "3.0 (Beta Build 110)",
 	"release": 2,
 	"debugMode": 1,
 	"cmdCD": 7000,
@@ -25,7 +25,7 @@
 		"user": "MCbeta",
 		"password": "Comment678",
 		"database": "MCSS_BETA",
-		"options": {"enableArithAbort": false}},
+		"options": {"enableArithAbort": false, "trustServerCertificate": true}},
 		"token": "NjUyNzI2MTA3NTM1MzEwODU5.G_UEoG.DiSiEC2BHAGefBVZUdxx3-KWlFg9DSVE48YJKQ",
 		"supportServer": "799882620913319957",
 		"suggestionChannel": "844819088499933204",
