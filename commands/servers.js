@@ -10,7 +10,6 @@ global.shardInfo.commandsRun++
 try{
 var subCommand = interaction.options.getSubcommand()
 var dbData = JSON.parse((await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset[0].SERVERS);
-console.log(dbData)
 if (subCommand == 'add'){
 	global.toConsole.log('/servers add run by ' + interaction.user.username + '#' + interaction.user.discriminator + ' (' + interaction.user.id + ')')
 	if (interaction.channel.type == 'dm') {return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.permissions.noDM, 'error', stringJSON)], ephemeral: true})}
