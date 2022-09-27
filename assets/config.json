@@ -4,8 +4,9 @@
 	"debugMode": 1,
 	"cmdCD": 7000,
 	"sugCD": 900000,
-	"enableMessageEdit": false,
+	"enableMessageEdit": true,
 	"enableChannelEdit": false,
+	"enableNotifier": false,
 	"configs":
 [
 	{

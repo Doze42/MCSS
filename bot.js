@@ -67,14 +67,15 @@ client.on('rateLimit', (info) => {
 })
 
 client.on("ready", async function(){
-global.toConsole = {
-	log: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgBlue('[log]') + ' ' + msg)},
-	info: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgGreen('[info]') + ' ' + msg)},
-	error: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[error]') + ' ' + msg)},
-	debug: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[debug]') + ' ' + msg)}
-}
-global.toConsole.info('Successfully logged in using Token ' + botConfig.release + ' at ' + new Date())
-client.user.setActivity(global.botConfig.configs[global.botConfig.release].activity.text, {type: global.botConfig.configs[global.botConfig.release].activity.type});
+	global.toConsole = {
+		log: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgBlue('[log]') + ' ' + msg)},
+		info: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgGreen('[info]') + ' ' + msg)},
+		error: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[error]') + ' ' + msg)},
+		debug: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[debug]') + ' ' + msg)}
+	}
+	global.toConsole.info('Successfully logged in using Token ' + botConfig.release + ' at ' + new Date())
+	if(global.botConfig.enableMessageEdit || global.botConfig.enableChannelEdit || global.botConfig.enableNotifer){liveStatus()} //starts live update loop
+	client.user.setActivity(global.botConfig.configs[global.botConfig.release].activity.text, {type: global.botConfig.configs[global.botConfig.release].activity.type});
 })
 
 client.on('interactionCreate', async function (interaction){
