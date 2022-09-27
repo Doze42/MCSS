@@ -24,7 +24,6 @@ const dbl = new DBL('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjcyNjEwNz
 const strings = require('./funcs/strings'); //public string manipulation functions
 const compat = require('./funcs/compat'); //hard coded exception checks
 const richEmbeds = require('./funcs/embeds'); //embed generation
-const queryServer = require('./funcs/dummyAPI.js');
 const liveNotifier = require('./funcs/liveNotifier.js');
 const channelEdit = require('./funcs/channelEdit.js')
 const panelEdit = require('./funcs/panelEdit.js')
