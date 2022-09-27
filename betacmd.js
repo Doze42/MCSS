@@ -81,7 +81,7 @@ const status = new SlashCommandBuilder()
 			.setDescription('The port number of the server')
 			.setRequired(false));
 			
-/* const automsg = new SlashCommandBuilder()
+const automsg = new SlashCommandBuilder()
 	automsg.setName('automsg')
 	automsg.setDescription('Creates a Message Edit Live Status panel')
 	automsg.addStringOption(option =>
@@ -100,7 +100,7 @@ const status = new SlashCommandBuilder()
 		option.setName('embeds')
 			.setDescription('Saved embed template to use')
 			.setRequired(false));
-const autopnl = new SlashCommandBuilder()
+/* const autopnl = new SlashCommandBuilder()
 	autopnl.setName('autocnl')
 	autopnl.setDescription('Confugures a voice channel for Channel Edit Live Status')
 	autopnl.addChannelOption(option =>
@@ -129,7 +129,7 @@ const autopnl = new SlashCommandBuilder()
 			.setDescription("Saved server to use")
 			.setRequired(false)); */
 const commands = [
-//automsg,
+automsg,
 status,
 embeds,
 //autopnl,
@@ -148,7 +148,7 @@ servers,
 }
 ]; 
 
-const rest = new REST({ version: '10' }).setToken('NzkwMDc1Nzk2MDQyOTQwNDQ4.Gfni2-.lpUr73JRyr-JFs20kR0Yg513-SW10H2z4hg04M');
+const rest = new REST({ version: '10' }).setToken('NzkwMDc1Nzk2MDQyOTQwNDQ4.GzGw5V.W6IjHK9pGcabnIXzN_AqOkg0XaDvLMz9CLnr7w');
 
 (async () => {
   try {
