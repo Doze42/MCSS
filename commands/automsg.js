@@ -3,7 +3,7 @@
 const richEmbeds = require('../funcs/embeds'); //embed generation
 module.exports = {run}
 const sql = require('mssql')
-const queryServer = require('../funcs/dummyAPI.js');
+const queryServer = require('../funcs/queryServer.js');
 const Discord = require('discord.js') //discord.js for embed object
 const strings = require('../funcs/strings'); //public string manipulation functions
 
@@ -47,7 +47,7 @@ await interaction.deferReply({ephemeral: true});
 
 var bufferSource = global.staticImages.pack;
 
-try {var pingResults = await queryServer.ping(serverIP, serverPort)
+try {var pingResults = await queryServer(serverIP, parseInt(serverPort))
 	if (pingResults.favicon){bufferSource = pingResults.favicon.split(';base64,').pop();}
 	pingResults.error = "Ping Successful"
 	var statEmbed = richEmbeds.statusEmbed({
