@@ -12,12 +12,12 @@ stg = stg.replace(/§4|§c|§6|§e|§2|§a|§b|§3|§1|§9|§d|§5|§f|§7|§8|�
 return stg;}
 
 function insertData(string, data){
-	if (data.hostname){string = string.replace(/%ip%/g, data.hostname);}
+	if (data.ip){string = string.replace(/%ip%/g, data.ip);}
 	if (data.type){string = string.replace(/%type%/g, data.type);}
 	if (data.motd){string = string.replace(/%motd%/g, data.motd);}
 	if (data.version){string = string.replace(/%version%/g, data.version);}
 	if (data.players){
-		if (data.players.online){string = string.replace(/%now%/g, data.players.online);}
+		string = string.replace(/%now%/g, data.players.online);
 		if (data.players.max){string = string.replace(/%max%/g, data.players.max);}
 		string = string.replace(/%open%/g, data.players.max - data.players.online);
 	}

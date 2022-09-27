@@ -63,7 +63,7 @@ sql.on('error', err => {
 })
 
 client.on('rateLimit', (info) => {
-  console.log(`Rate limit hit ${info.timeDifference ? info.timeDifference : info.timeout ? info.timeout: 'Unknown timeout '}`)
+  global.toConsole.error(`Rate limit hit ${info.timeDifference ? info.timeDifference : info.timeout ? info.timeout: 'Unknown timeout '}`)
 })
 
 client.on("ready", async function(){
@@ -74,6 +74,7 @@ global.toConsole = {
 	debug: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[debug]') + ' ' + msg)}
 }
 global.toConsole.info('Successfully logged in using Token ' + botConfig.release + ' at ' + new Date())
+client.user.setActivity(global.botConfig.configs[global.botConfig.release].activity.text, {type: global.botConfig.configs[global.botConfig.release].activity.type});
 })
 
 client.on('interactionCreate', async function (interaction){
@@ -81,7 +82,7 @@ try {
 	if(!interaction.isCommand()) return; //exits if not command
 	if(!(await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset.length){ //Adds new servers to database
 		try{await loadDefaults.addServer(interaction.guildId)}
-		catch(err){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.cmdHandler.databaseAddFailed, 'error', stringJSON)], ephemeral: true})}}
+	catch(err){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.cmdHandler.databaseAddFailed, 'error', stringJSON)], ephemeral: true})}}
 	var userData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from USERS WHERE ID = ' + interaction.user.id)).recordset[0]
 	if (userData){
 		if (userData.BLACKLIST){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.permissions.blacklisted + userData.BLACKLIST_REASON, 'error', stringJSON)], ephemeral: true})}
