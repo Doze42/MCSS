@@ -21,9 +21,7 @@ var channel = interaction.options.getChannel('channel');
 if(!channel.permissionsFor(interaction.client.user.id).has(["MANAGE_CHANNELS"])){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.permissions.manageChannel, 'error', stringJSON)], ephemeral: true})}
 if (interaction.user.PermissionLevel == 0 && !interaction.member.permissions.has("ADMINISTRATOR")){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.permissions.restricted, 'error', stringJSON)], ephemeral: true})}
 var liveArr = JSON.parse(dbData.LIVE)
-if(liveArr.length >= JSON.parse(dbData.CONFIG).limits.liveElements){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.automsg.maxElements, 'error', stringJSON)], ephemeral: true})}
-var guildServers = JSON.parse(dbData.SERVERS)
-if (!serverIP && !serverAlias && !guildServers.servers.length){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.automsg.noServer, 'error', stringJSON)], ephemeral: true})}
+if(JSON.parse(dbData.LIVE).length >= JSON.parse(dbData.CONFIG).limits.liveElements){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.automsg.maxElements, 'error', stringJSON)], ephemeral: true})} //checks live element limitsif (!serverIP && !serverAlias && !guildServers.servers.length){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.automsg.noServer, 'error', stringJSON)], ephemeral: true})}
 if (!serverIP && !serverAlias){serverAlias = guildServers.servers[guildServers.default].alias}
 if (serverAlias){ //loads saved server data
 	var aliasData = guildServers.servers.filter((obj) => obj.alias == serverAlias)
@@ -61,6 +59,8 @@ var stateInfo = {online: false}
 channel.edit({name: channelName}, stringJSON.autocnl.editReason)
 
 if (serverPort){serverIP = serverIP += (':' + serverPort)}
+dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset[0]; //refreshes data to avoid conflict
+var liveArr = JSON.parse(dbData.LIVE)
 liveArr.push({
 	"type": "channel",
 	"ip": serverIP,

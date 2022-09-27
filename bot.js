@@ -152,10 +152,10 @@ async function processQueue(){
 		promises.push(new Promise(async(resolve, reject) => {
 			var element = statusQueue.shift();
 			if (element.type == 'panel'){
-				var automsgData = JSON.parse((await new sql.Request(global.pool).query("SELECT * FROM SERVERS WHERE SERVER_ID = " + element.serverID)).recordset[0].LIVE)
-				var panelData = automsgData[automsgData.findIndex((obj) => obj.messageID == element.messageID)]
 				try{
 					await panelEdit.update(element, client)
+					var automsgData = JSON.parse((await new sql.Request(global.pool).query("SELECT * FROM SERVERS WHERE SERVER_ID = " + element.serverID)).recordset[0].LIVE)
+					var panelData = automsgData[automsgData.findIndex((obj) => obj.messageID == element.messageID)]
 					panelData.lastPing = element.timestamp;
 					panelData.lastState = element.embed;				
 				}

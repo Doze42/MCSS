@@ -18,7 +18,7 @@
 		"supportServer": "799882620913319957",
 		"suggestionChannel": "799890506757963857",
 		"expressPort": 4889,
-		"liveQueuePause": 1000
+		"liveQueuePause": 2000
 	},
 	{
 		"dbConfig": {"server": "localhost\\SQLEXPRESS",
@@ -30,7 +30,7 @@
 		"supportServer": "799882620913319957",
 		"suggestionChannel": "844819088499933204",
 		"expressPort": 4890,
-		"liveQueuePause": 1000
+		"liveQueuePause": 2000
 	},
 	{
 		"dbConfig": {"server": "localhost\\SQLEXPRESS",
@@ -42,7 +42,7 @@
 		"supportServer": "690081112164139040",
 		"suggestionChannel": "795926682326401044",
 		"expressPort": 4891,
-		"liveQueuePause": 1000
+		"liveQueuePause": 2000
 	}
 ]
 }
