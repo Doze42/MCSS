@@ -1,5 +1,5 @@
 {
-	"botver": "3.0 (Beta Build 135)",
+	"botver": "3.0 (Beta Build 140)",
 	"release": 2,
 	"debugMode": 1,
 	"cmdCD": 7000,
@@ -20,7 +20,9 @@
 		"supportServer": "799882620913319957",
 		"suggestionChannel": "799890506757963857",
 		"expressPort": 4889,
-		"liveQueuePause": 2000
+		"liveQueuePause": 2000,
+		"liveElementTimeout": 6000,
+		"liveElementMaxFails": 15
 	},
 	{
 		"dbConfig": {"server": "localhost\\SQLEXPRESS",
@@ -33,7 +35,9 @@
 		"supportServer": "799882620913319957",
 		"suggestionChannel": "844819088499933204",
 		"expressPort": 4890,
-		"liveQueuePause": 2000
+		"liveQueuePause": 2000,
+		"liveElementTimeout": 6000,
+		"liveElementMaxFails": 15
 	},
 	{
 		"dbConfig": {"server": "localhost\\SQLEXPRESS",
@@ -46,7 +50,9 @@
 		"supportServer": "690081112164139040",
 		"suggestionChannel": "795926682326401044",
 		"expressPort": 4891,
-		"liveQueuePause": 2000
+		"liveQueuePause": 2000,
+		"liveElementTimeout": 6000,
+		"liveElementMaxFails": 3
 	}
 ]
 }

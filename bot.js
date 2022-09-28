@@ -104,27 +104,26 @@ catch (err){global.toConsole.error("Interaction Failed: " + err)}
 })
 
 async function liveStatus(){
-	toConsole.debug('Starting Live Status update..')
+	global.toConsole.debug('Starting Live Status update..')
 	var refreshStart = new Date().getTime();
-	var dbData = await new sql.Request(global.pool).query("SELECT * FROM SERVERS");
+	var dbData = await new sql.Request(global.pool).query("SELECT * FROM LIVE");
 	var i = 0;
-	var guilds = new Map();
-	for (; i < dbData.recordset.length; i++){if(client.guilds.cache.has(dbData.recordset[i].SERVER_ID)){guilds.set(dbData.recordset[i].SERVER_ID, dbData.recordset[i])}}
-	for await (const [key, value] of guilds){
-		var liveArray = JSON.parse(value.LIVE)
-		if (liveArray.length){
-		await Promise.all(liveArray.map(async (element) => {
-			if (element.type == 'panel'){				
-				var res = await panelEdit.check(element, stringJSON)
+	var elements = new Map();
+	for (var i = 0; i < dbData.recordset.length; i++){if(client.guilds.cache.has(dbData.recordset[i].serverID)){elements.set(dbData.recordset[i].guid, dbData.recordset[i])}}
+	for await (const [key, value] of elements){
+			var data = JSON.parse(value.data);
+			if (data.type == 'panel'){				
+				var res = await panelEdit.check(data, stringJSON)
 				if (res.update){
-					toConsole.debug('Adding panel ' + element.messageID + ' to queue...')
+					toConsole.debug('Adding panel ' + data.messageID + ' to queue...')
 					statusQueue.push({
 						type: 'panel',
+						guid: value.guid,
 						disable: res.disable,
 						embed: res.data,
-						serverID: key,
-						messageID: element.messageID,
-						channelID: element.channelID,
+						serverID: data.guildID,
+						messageID: data.messageID,
+						channelID: data.channelID,
 						timestamp: new Date().getTime()
 					})
 				}
@@ -132,18 +131,16 @@ async function liveStatus(){
 			//Following section will be used after the addition of other status types
 			//else if (element.type == 'channel') {channelEdit.check(element)}
 			//else if (element.type == 'notifier') {liveNotifier.check(element)}
-		}))
 	}
-	}
-	statusCache.clear();
-	console.log(statusQueue.length)
+	statusCache.clear(); //clears cached server status data
+	global.toConsole.debug(statusQueue.length + ' elements in queue')
 	if(statusQueue.length){await processQueue();}
 	global.liveStatusTime = new Date().getTime() - refreshStart;
 	if (global.liveStatusTime > 45000) {liveStatus()}
 	if (global.liveStatusTime <= 45000) {setTimeout(() => {liveStatus()}, 45000)}
 }
 
-async function processQueue(){
+async function processQueue(){ //todo: add try/catch
 	var promises = [] //array of promises
 	await new Promise(async(resolve, reject) => {
 	var queueLoop = setInterval(async function(){
@@ -151,28 +148,34 @@ async function processQueue(){
 		if(!statusQueue.length){
 			clearInterval(queueLoop);
 			return resolve();}
-		promises.push(new Promise(async(resolve, reject) => {
-			var element = statusQueue.shift();
-			if (element.type == 'panel'){
-				try{
-					await panelEdit.update(element, client)
-					var automsgData = JSON.parse((await new sql.Request(global.pool).query("SELECT * FROM SERVERS WHERE SERVER_ID = " + element.serverID)).recordset[0].LIVE)
-					var panelData = automsgData[automsgData.findIndex((obj) => obj.messageID == element.messageID)]
-					panelData.lastPing = element.timestamp;
-					panelData.lastState = element.embed;				
+		promises.push(Promise.race([new Promise(async(resolve, reject) => {
+			try{
+				var element = statusQueue.shift();	
+				if (element.type == 'panel'){
+					var panelData = JSON.parse((await new sql.Request(global.pool).query("SELECT * FROM LIVE WHERE guid = '" + element.guid +"'")).recordset[0].data)
+					try{
+						await panelEdit.update(element, client)					
+						panelData.lastPing = element.timestamp;
+						panelData.lastState = element.embed;
+						panelData.failureCount = 0;
+					}
+					catch(err){ //Panel failed, log	
+						if (panelData.failureCount >= global.botConfig.configs[global.botConfig.release].liveElementMaxFails){
+						await new sql.Request(global.pool).query("DELETE FROM LIVE WHERE guid = '" + element.guid +"'")
+						toConsole.log('Panel with ID ' + element.messageID + ' exceeded maximum failure count and has been removed.')}
+						else{panelData.failureCount++
+						toConsole.log('Panel with ID ' + element.messageID + ' failed to update: ' + err)}
+					} 				
+					resolve('Finished Updating')
+					await new sql.Request(global.pool).query("UPDATE LIVE SET data = N'" + JSON.stringify(panelData).replace(/'/g, "''") + "' WHERE guid = '" + element.guid + "'")
 				}
-				catch(err){
-					panelData.failureCount++
-					toConsole.log('Panel with ID ' + element.messageID + ' failed to update: ' + err)
-				} //Panel failed, log
-				automsgData.splice(automsgData[automsgData.findIndex((obj) => obj.messageID == element.messageID)], 1, panelData)
-				await new sql.Request(global.pool).query("UPDATE SERVERS SET LIVE = N'" + JSON.stringify(automsgData).replace(/'/g, "''") + "' WHERE SERVER_ID = " + element.serverID)
-			}
-		resolve('Finished Updating')
-		}))
+				//other status types will be added here
+			
+		} catch(err){reject(err)}
+		}), new Promise((resolve, reject) => {setTimeout(() => {resolve('Panel Timed Out')}, global.botConfig.configs[global.botConfig.release].liveElementTimeout)})]))
 	}, global.botConfig.configs[global.botConfig.release].liveQueuePause)})
 	
-	var test = await Promise.allSettled(promises)
+	var test = await Promise.any(promises)
 	console.log(test)
 	
 }

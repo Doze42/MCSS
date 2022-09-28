@@ -88,6 +88,7 @@
 	},
 	"config":{
 		"lang": "en",
+		"liveElementCount": 0,
 		"limits": {
 			"liveElements": 2000,
 			"savedServers": 5,

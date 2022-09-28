@@ -20,6 +20,7 @@
     "lodash.isequal": "^4.5.0",
     "mssql": "^7.2.1",
     "sharp": "^0.29.1",
-    "systeminformation": "^5.9.2"
+    "systeminformation": "^5.9.2",
+    "uuid": "^9.0.0"
   }
 }

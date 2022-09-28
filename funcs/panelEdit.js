@@ -66,7 +66,7 @@ function update(data, client){
 				await message.edit({embeds: [data.embed]})
 				resolve('Updated Sucessfully');
 			}
-			catch(err){}
+			catch(err){reject(err)}
 		}
 		catch(err){
 			global.toConsole.error('Failed at panelEdit.update with panel ID ');
