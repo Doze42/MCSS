@@ -6,7 +6,7 @@ const sql = require('mssql')
 const queryServer = require('../funcs/queryServer.js');
 const Discord = require('discord.js') //discord.js for embed object
 const strings = require('../funcs/strings'); //public string manipulation functions
-
+const dns = require('node:dns');
 async function run(client, interaction, stringJSON){
 try{
 var dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset[0];
@@ -38,7 +38,7 @@ if (serverIP){if (serverIP.length > 253 || serverIP.length < 5){return interacti
 if (serverPort){
 	if ((serverPort < 1 || serverPort > 65535) || strings.checkChars(serverPort, 57, 48)){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.servers.badPort, 'error', stringJSON)], ephemeral: true})};
 }
-
+	await dns.resolveSrv('_minecraft._tcp.' + serverIP, (error, record) => {if (record){serverPort = record[0].port;}}); //SRV record compatability
 await interaction.deferReply({ephemeral: true});
 
 

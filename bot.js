@@ -58,8 +58,13 @@ launch() {
 this.client.login(global.botConfig.configs[global.botConfig.release].token);
 var client = this.client
 console.info('Spawning Shard...')
+
 sql.on('error', err => {
     console.log('SQL Error: ' + err, 'error');
+})
+
+process.on('unhandledRejection', err => {
+	console.log(err)	
 })
 
 client.on('rateLimit', (info) => {

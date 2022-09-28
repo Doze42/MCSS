@@ -6,6 +6,7 @@ const richEmbeds = require('../funcs/embeds') //embed generation
 const sql = require('mssql')
 const strings = require('../funcs/strings.js') //string manipulation
 const Discord = require('discord.js') //discord.js for embed object
+const dns = require('node:dns');
 module.exports = {run}
 
 async function run(client, interaction, stringJSON){
@@ -29,6 +30,7 @@ async function run(client, interaction, stringJSON){
 			serverIP = splitIP[0]
 			serverPort = splitIP[1].trim()
 		}
+		await dns.resolveSrv('_minecraft._tcp.' + serverIP, (error, record) => {if (record){serverPort = record[0].port;}});	
 		serverIP = serverIP.trim(); //removes any whitespace from ip
 		if (serverIP){if (serverIP.length > 253 || serverIP.length < 5){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.status.ipLength, 'error', stringJSON)], ephemeral: true})}};
 		if (serverPort){
