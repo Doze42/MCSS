@@ -3,6 +3,7 @@
 const fs = require('fs')
 const queryServer = require('../funcs/queryServer.js');
 const richEmbeds = require('../funcs/embeds') //embed generation
+const compat = require ('../funcs/compat.js');
 const sql = require('mssql')
 const strings = require('../funcs/strings.js') //string manipulation
 const Discord = require('discord.js') //discord.js for embed object
@@ -41,7 +42,7 @@ async function run(client, interaction, stringJSON){
 		try {
 			var bufferSource = global.staticImages.pack;
 			var pingResults = await queryServer(serverIP, parseInt(serverPort))
-			//console.log(embedData.thumbnailEnable)
+			if (await compat.check(pingResults, JSON.parse(dbData.COMPAT))){throw stringJSON.status.compatOffline;};
 			if (pingResults.favicon){bufferSource = pingResults.favicon.split(';base64,').pop();}
 			var statEmbed = richEmbeds.statusEmbed({
 				online: true,

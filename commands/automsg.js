@@ -8,6 +8,7 @@ const Discord = require('discord.js') //discord.js for embed object
 const strings = require('../funcs/strings'); //public string manipulation functions
 const { v4: uuid } = require('uuid');
 const dns = require('node:dns');
+const compat = require ('../funcs/compat.js');
 
 async function run(client, interaction, stringJSON){
 try{
@@ -50,6 +51,7 @@ try{
 	var bufferSource = global.staticImages.pack;
 
 	try {var pingResults = await queryServer(serverIP, parseInt(serverPort))
+		if (await compat.check(pingResults, JSON.parse(dbData.COMPAT))){throw stringJSON.status.compatOffline;};
 		if (pingResults.favicon){bufferSource = pingResults.favicon.split(';base64,').pop();}
 		pingResults.error = "Ping Successful"
 		var statEmbed = richEmbeds.statusEmbed({
@@ -89,7 +91,7 @@ try{
 			"guildID": message.guildId,
 			"embedTemplate": embedData[0],
 			"lastState": statEmbed
-		}) + "', " + message.guildId + ")");
+		}).replace(/'/g, "''") + "', " + message.guildId + ")");
 	return interaction.editReply({embeds:[richEmbeds.makeReply(stringJSON.automsg.success, 'notif', stringJSON)]})
 }
 

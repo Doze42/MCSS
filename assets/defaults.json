@@ -103,5 +103,18 @@
 		"default": 0,
 		"servers": []
 	},
-	"live": []
+	"compat": [
+		{
+			"trigger": "This server is offline.",
+			"domain": "aternos.me"
+		},
+		{
+			"trigger": "Server not found.",
+			"domain": "aternos.me"
+		},
+		{
+			"trigger": "Start your server at www.minefort.com",
+			"domain": "minefort.com"
+		}
+	]
 }

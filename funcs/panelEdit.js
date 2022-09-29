@@ -5,11 +5,16 @@ const richEmbeds = require('../funcs/embeds'); //embed generation
 const isEqual = require('lodash.isequal');
 const Discord = require('discord.js') //discord.js for embed object
 const sql = require('mssql')
+const compat = require ('../funcs/compat.js');
 
 async function check(element, stringJSON){
 try{
 	if (!global.statusCache.has(element.ip)){
-		try {global.statusCache.set(element.ip, {online: true, data: await queryServer(element.ip)})}
+		var pingResults = await queryServer(element.ip)
+		try {
+			var dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + element.guildID)).recordset[0].COMPAT
+			if (await compat.check(pingResults, JSON.parse(dbData))){throw stringJSON.status.compatOffline;};
+			global.statusCache.set(element.ip, {online: true, data: pingResults})}
 		catch(err){
 		global.statusCache.set(element.ip, {online: false, data: err})}
 	}

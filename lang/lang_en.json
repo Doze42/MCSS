@@ -24,7 +24,8 @@
 	"badPort": "Port argument must be between 1 and 65535. Please check your command and try again.",
 	"ipLength": "Your IP Address/Domain name must be between 5 and 253 characters. Please check your command and try again.",
 	"noServer": "No server specified. Please use the **server** option to select a saved server by its alias or use the **address** and **port** options to specify a different server.",
-	"aliasNotFound": "Unable to locate a saved server with that alias."
+	"aliasNotFound": "Unable to locate a saved server with that alias.",
+	"compatOffline": "Compatability Mode Triggered"
 },
 "automsg": {
 	"noServer": "No server specified. Please use the **server** option to select a saved server by its alias or use the **address** and **port** options to specify a different server.",
