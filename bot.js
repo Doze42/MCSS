@@ -44,7 +44,8 @@ status: require('./commands/status'),
 botstats: require('./commands/botstats'),
 servers: require('./commands/servers'),
 automsg: require('./commands/automsg'),
-autocnl: require('./commands/autocnl')
+autocnl: require('./commands/autocnl'),
+admin: require('./commands/admin')
 }
 
 global.shardInfo = {
@@ -102,8 +103,7 @@ try {
 	else if (interaction.commandName == 'automsg'){commands.automsg.run(client, interaction, stringJSON);}
 	//else if (interaction.commandName == 'autocnl'){commands.autocnl.run(client, interaction, stringJSON);}
 	else if (interaction.commandName == 'test'){
-	liveStatus()
-	return interaction.reply('done')
+	client.shard.restart(client.shard.id);
 	}
 }
 catch (err){global.toConsole.error("Interaction Failed: " + err)}

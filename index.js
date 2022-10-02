@@ -9,7 +9,6 @@ const sharder = new ShardingManager(join(__dirname, 'bot'), {
 	ipcSocket: 9999
 });
 
-try{
 sharder.spawn();
-}
-catch(err){console.log(err)}
+
+sharder.on('error', (err) => {console.log('Sharder Error: ' + err)});

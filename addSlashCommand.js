@@ -2,6 +2,19 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
+const admin = new SlashCommandBuilder()
+	admin.setName('admin')
+	admin.setDescription('Administrative commands for bot staff')
+admin.addSubcommand(subcommand =>
+		subcommand
+			.setName('respawn')
+			.setDescription('Respawns a shard'))
+			.addIntegerOption(option => option.setName('id').setDescription('The ID of the shard to respawn').setRequired(false))
+admin.addSubcommand(subcommand =>
+		subcommand
+			.setName('respawnall')
+			.setDescription('Respawns all shards'))
+			
 const servers = new SlashCommandBuilder()
 	servers.setName('servers')
 	servers.setDescription('Modifies the saved servers for this guild')
@@ -23,7 +36,7 @@ const servers = new SlashCommandBuilder()
 			.setName('list')
 			.setDescription('Lists the saved servers for this guild'))
 			
-const embeds = new SlashCommandBuilder()
+/* const embeds = new SlashCommandBuilder()
 	embeds.setName('embeds')
 	embeds.setDescription('Modifies the saved embeds for this guild')
 	embeds.addSubcommand(subcommand =>
@@ -63,7 +76,7 @@ const embeds = new SlashCommandBuilder()
 			.setName('preview')
 			.setDescription('Previews a saved embed template')
 			.addStringOption(option => option.setName('alias').setDescription('The alias of the template to preview').setRequired(true)))
-
+ */
 
 const status = new SlashCommandBuilder()
 	status.setName('status')
@@ -100,7 +113,7 @@ const automsg = new SlashCommandBuilder()
 		option.setName('embeds')
 			.setDescription('Saved embed template to use')
 			.setRequired(false));
-const autopnl = new SlashCommandBuilder()
+/* const autopnl = new SlashCommandBuilder()
 	autopnl.setName('autocnl')
 	autopnl.setDescription('Confugures a voice channel for Channel Edit Live Status')
 	autopnl.addChannelOption(option =>
@@ -127,13 +140,14 @@ const autopnl = new SlashCommandBuilder()
 	autopnl.addStringOption(option =>
 		option.setName('server')
 			.setDescription("Saved server to use")
-			.setRequired(false));
+			.setRequired(false)); */
 const commands = [
 automsg,
 status,
-embeds,
-autopnl,
+//embeds,
+//autopnl,
 servers,
+admin,
 {
 	name: 'test',
 	description: 'Debug command'

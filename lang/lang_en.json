@@ -56,6 +56,10 @@
 	"noDM": "This command can't be used in a direct message.",
 	"channelPerms": "Unable to process your request because the bot lacks the **Send Messages, Embed Links** or **Attach Files** permission. Please ensure the bot has these permissions in your server or contact the server's staff.",
 	"manageChannel": "Unable to process your request because the bot lacks the **Manage Channel** permission. Please ensure the bot has these permissions in your server or contact the server's staff."
+},
+"admin": {
+	"respawningAll": "Respawning all shards.",
+	"respawnOne": "Respawning shard "
 }
 
 }
