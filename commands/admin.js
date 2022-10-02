@@ -7,7 +7,7 @@ async function run(client, interaction, stringJSON){
 		if (interaction.user.PermissionLevel < 2) {return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.permissions.restricted, 'error', stringJSON)], ephemeral: true})}
 		if (subCommand == 'respawn'){
 			var id = interaction.options.getString('id');
-			id (!id) {id = client.shard.id}
+			(!id) {id = client.shard.id}
 			interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.admin.respawnOne, 'notif', stringJSON)], ephemeral: true})
 			client.shard.restart(id);
 		}
