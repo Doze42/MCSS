@@ -64,8 +64,9 @@ sql.on('error', err => {
 })
 
 process.on('unhandledRejection', err => {
-	console.log(err)	
-})
+	global.toConsole.error('Reloading Shard: ' + err);
+	client.shard.restart(client.shard.id);
+});
 
 client.on('rateLimit', (info) => {
   global.toConsole.error(`Rate limit hit ${info.timeDifference ? info.timeDifference : info.timeout ? info.timeout: 'Unknown timeout '}`)

@@ -7,7 +7,6 @@ const queryServer = require('../funcs/queryServer.js');
 const Discord = require('discord.js') //discord.js for embed object
 const strings = require('../funcs/strings'); //public string manipulation functions
 const { v4: uuid } = require('uuid');
-const dns = require('node:dns');
 const compat = require ('../funcs/compat.js');
 
 async function run(client, interaction, stringJSON){
@@ -37,7 +36,6 @@ try{
 		serverIP = splitIP[0]
 		serverPort = splitIP[1].trim()
 	}
-	await dns.resolveSrv('_minecraft._tcp.' + serverIP, (error, record) => {if (record){serverPort = record[0].port;}}); //SRV record compatability
 	serverIP = serverIP.trim(); //removes any whitespace from ip
 	if (serverIP){if (serverIP.length > 253 || serverIP.length < 5){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.servers.ipLength, 'error', stringJSON)], ephemeral: true})}};
 	if (serverPort){
