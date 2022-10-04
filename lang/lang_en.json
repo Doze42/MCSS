@@ -17,8 +17,12 @@
 	"badPort": "Port argument must contian only numbers and be between 1 and 65535. Please check your command and try again."
 },
 "invite": {
-	"embedTitle": "Click here to join the support server!",
 	"embedBody": "Want to add Minecraft Server Status to your server? \n [Click here to invite the bot](https://discord.com/api/oauth2/authorize?client_id=652726107535310859&permissions=52304&scope=bot) \n \n Interested in the beta program? \n [Click here to invite the Beta bot](https://123computer.net/mcss/beta)"
+},
+"help": {
+	"embedTitle": "Click here to read the documentation!",
+	"embedBody": "Still need help? \n [Click here to join the support server!](https://discord.gg/szr7VgVxzQ) \n \n [Check out our video tutorial!](https://123computer.net/mcss/tutorial)",
+	"docsLink": "https://123computer.net/mcss/docs/en"
 },
 "status": {
 	"badPort": "Port argument must be between 1 and 65535. Please check your command and try again.",

@@ -55,8 +55,7 @@ try{
 		else {return {update: false, disable: disable};}
 }
 catch(err){
-	global.toConsole.error('Failed at panelEdit.check with panel ID ' + element.messageID);
-	console.log(err)
+	global.toConsole.error('Failed at panelEdit.check with panel ID ' + element.messageID + ' : ' + err);
 }
 }
 
@@ -69,6 +68,7 @@ function update(data, client, stringJSON){
 				var message = await channel.messages.fetch(data.messageID);
 				if (channel.type !== 'GUILD_TEXT'){
 					data.embed = richEmbeds.makeReply(stringJSON.automsg.disabled.channelType, 'error', stringJSON);
+					await message.removeAttachments(); //removes the favicon so it doesn't look weird
 					await message.edit({embeds: [data.embed]});
 					reject('remove');
 				}

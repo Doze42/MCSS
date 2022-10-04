@@ -45,7 +45,8 @@ botstats: require('./commands/botstats'),
 servers: require('./commands/servers'),
 automsg: require('./commands/automsg'),
 autocnl: require('./commands/autocnl'),
-admin: require('./commands/admin')
+admin: require('./commands/admin'),
+help: require('./commands/help')
 }
 
 global.shardInfo = {
@@ -103,6 +104,7 @@ try {
 	else if (interaction.commandName == 'botstats'){commands.botstats.run(client, interaction, stringJSON);}
 	else if (interaction.commandName == 'servers'){commands.servers.run(client, interaction, stringJSON);}
 	else if (interaction.commandName == 'automsg'){commands.automsg.run(client, interaction, stringJSON);}
+	else if (interaction.commandName == 'help'){commands.help.run(client, interaction, stringJSON);}
 	//else if (interaction.commandName == 'autocnl'){commands.autocnl.run(client, interaction, stringJSON);}
 	else if (interaction.commandName == 'test'){
 	console.log(!client.guilds.cache.has(interaction.guildId))
@@ -181,12 +183,8 @@ async function processQueue(){ //todo: add try/catch
 			
 		} catch(err){reject(err)}
 		}), new Promise((resolve, reject) => {setTimeout(() => {resolve('Panel Timed Out')}, global.botConfig.configs[global.botConfig.release].liveElementTimeout)})]))
-	}, global.botConfig.configs[global.botConfig.release].liveQueuePause)})
-	
-	var test = await Promise.any(promises)
-	console.log(test)
-	
+	}, global.botConfig.configs[global.botConfig.release].liveQueuePause)})	
+	toConsole.debug(await Promise.any(promises))
 }
-
 }			
 }

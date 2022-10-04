@@ -13,9 +13,7 @@ await interaction.reply({
 	files: [new Discord.MessageAttachment(Buffer.from(staticImages.mcss_logo, 'base64'), 'logo.png')],
 	embeds:[ 
 	new Discord.MessageEmbed() //create embed for suggestion
-		.setTitle(stringJSON.invite.embedTitle)
 		.setColor(3447003)
-		.setURL('https://discord.gg/szr7VgVxzQ')
 		.setFooter({text: stringJSON.embeds.footerText})
 		.setTimestamp()
 		.setDescription(stringJSON.invite.embedBody)
