@@ -88,9 +88,11 @@ client.on("ready", async function(){
 client.on('interactionCreate', async function (interaction){
 try {
 	if(!interaction.isCommand()) return; //exits if not command
-	if(!(await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset.length){ //Adds new servers to database
+	if(interaction.inGuild()){
+		if(!(await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset.length){ //Adds new servers to database
 		try{await loadDefaults.addServer(interaction.guildId)}
-	catch(err){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.cmdHandler.databaseAddFailed, 'error', stringJSON)], ephemeral: true})}}
+		catch(err){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.cmdHandler.databaseAddFailed, 'error', stringJSON)], ephemeral: true})}}
+	}
 	var userData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from USERS WHERE ID = ' + interaction.user.id)).recordset[0]
 	if (userData){
 		if (userData.BLACKLIST){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.permissions.blacklisted + userData.BLACKLIST_REASON, 'error', stringJSON)], ephemeral: true})}
@@ -103,7 +105,7 @@ try {
 	else if (interaction.commandName == 'automsg'){commands.automsg.run(client, interaction, stringJSON);}
 	//else if (interaction.commandName == 'autocnl'){commands.autocnl.run(client, interaction, stringJSON);}
 	else if (interaction.commandName == 'test'){
-	client.shard.restart(client.shard.id);
+	console.log(!client.guilds.cache.has(interaction.guildId))
 	}
 }
 catch (err){global.toConsole.error("Interaction Failed: " + err)}
@@ -160,15 +162,15 @@ async function processQueue(){ //todo: add try/catch
 				if (element.type == 'panel'){
 					var panelData = JSON.parse((await new sql.Request(global.pool).query("SELECT * FROM LIVE WHERE guid = '" + element.guid +"'")).recordset[0].data)
 					try{
-						await panelEdit.update(element, client)					
+						await panelEdit.update(element, client, stringJSON)					
 						panelData.lastPing = element.timestamp;
 						panelData.lastState = element.embed;
 						panelData.failureCount = 0;
 					}
-					catch(err){ //Panel failed, log	
-						if (panelData.failureCount >= global.botConfig.configs[global.botConfig.release].liveElementMaxFails){
+					catch(err){ //Panel failed, log
+						if (panelData.failureCount >= global.botConfig.configs[global.botConfig.release].liveElementMaxFails || err == 'remove'){
 						await new sql.Request(global.pool).query("DELETE FROM LIVE WHERE guid = '" + element.guid +"'")
-						toConsole.log('Panel with ID ' + element.messageID + ' exceeded maximum failure count and has been removed.')}
+						toConsole.log('Panel with ID ' + element.messageID + ' has been removed due to failure count or channel issues.')}
 						else{panelData.failureCount++
 						toConsole.log('Panel with ID ' + element.messageID + ' failed to update: ' + err)}
 					} 				

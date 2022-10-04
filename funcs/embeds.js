@@ -22,7 +22,10 @@ function statusEmbed(args, stringJSON){
 		if(args.format.online.timestampEnable){statusEmbed.setTimestamp()}
 		if(args.format.thumbnailEnable){statusEmbed.setThumbnail('attachment://' + args.favicon)}
 		if(args.format.online.body.display){statusEmbed.setDescription(args.format.online.body.text)}
-		if(args.format.online.playersList.display && args.data.players.list && args.data.players.list.length){statusEmbed.addField(args.format.online.playersList.header, args.data.players.list.slice(0, 10).map(player => player.name).sort().join('\n'), true)}
+		if(args.format.online.playersList.display && args.data.players.list && args.data.players.list.length){statusEmbed.addFields({
+		"name": args.format.online.playersList.header,
+		"value": args.data.players.list.slice(0, 10).map(player => player.name).sort().join('\n'), 
+		"inline": true})}
 	}
 	return statusEmbed
 } //end of makeEmbed

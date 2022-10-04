@@ -60,14 +60,19 @@ catch(err){
 }
 }
 
-function update(data, client){
+function update(data, client, stringJSON){
 	return new Promise(async(resolve, reject) => {
 		try{
-			try{
+			try{				
 				//add perm check for channel read messages
 				var channel = await client.channels.cache.get(data.channelID);
-				//add checking for news channel
 				var message = await channel.messages.fetch(data.messageID);
+				if (channel.type !== 'GUILD_TEXT'){
+					data.embed = richEmbeds.makeReply(stringJSON.automsg.disabled.channelType, 'error', stringJSON);
+					await message.edit({embeds: [data.embed]});
+					reject('remove');
+				}
+				
 				await message.edit({embeds: [data.embed]})
 				resolve('Updated Sucessfully');
 			}

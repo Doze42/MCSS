@@ -33,11 +33,11 @@
 	"embedNotFound": "Unable to locate an embed template with that alias.",
 	"success": "The Live Status Panel was generated successfully.",
 	"defaultTemplateLive": "Default Template (Live)",
-	"channelType": "The **automsg** command can only be used in normal text channels.",
+	"channelType": "The **automsg** command can only be used in regular server text channels.",
 	"maxElements": "The maximum number of Live Status elements for this guild has been reached. Please delete one and try again or request higher limits in the support server.",
 	"disabled": {
-		"header": "Live Status Disabled",
-		"body": "The Minecraft server has been unreachable for over two weeks and this Live Status Panel has been disabled."
+		"deadPanel": "The Minecraft server has been unreachable for over two weeks and this Live Status Panel has been disabled.",
+		"channelType": "The type of this channel has been changed and live status has been disabled. This feature is only compatible with text channels."
 	}
 },
 "autocnl": {
@@ -54,6 +54,7 @@
 	"blacklisted": "You are blacklisted from using Minecraft Server Status. Reason: ",
 	"restricted": "You do not have sufficent permissions to access that command.",
 	"noDM": "This command can't be used in a direct message.",
+	"botScope": "This feature requires the bot user to be present. Please re-invite the application with the bot scope enabled.",
 	"channelPerms": "Unable to process your request because the bot lacks the **Send Messages, Embed Links** or **Attach Files** permission. Please ensure the bot has these permissions in your server or contact the server's staff.",
 	"manageChannel": "Unable to process your request because the bot lacks the **Manage Channel** permission. Please ensure the bot has these permissions in your server or contact the server's staff."
 },
