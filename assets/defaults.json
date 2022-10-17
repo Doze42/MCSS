@@ -8,7 +8,7 @@
 		  "thumbnailEnable": true,
 		  "online": {
 			"header": {
-			  "text": "Status for $ip$",
+			  "text": "Status for %ip%",
 			  "display": true
 			},
 			"footer": {
