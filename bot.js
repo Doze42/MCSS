@@ -5,7 +5,6 @@ const fs = require('fs')
 
 global.botConfig = JSON.parse(fs.readFileSync("./assets/config.json")); //Settings and configuration FileUpload
 
-const chalk = require ('chalk')
 const sql = require('mssql')
 global.pool = new sql.ConnectionPool(botConfig.configs[botConfig.release].dbConfig);
 global.pool.connect();
@@ -75,12 +74,6 @@ client.on('rateLimit', (info) => {
 })
 
 client.on("ready", async function(){
-	global.toConsole = {
-		log: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgBlue('[log]') + ' ' + msg)},
-		info: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgGreen('[info]') + ' ' + msg)},
-		error: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[error]') + ' ' + msg)},
-		debug: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[debug]') + ' ' + msg)}
-	}
 	global.toConsole.info('Successfully logged in using Token ' + botConfig.release + ' at ' + new Date())
 	if(global.botConfig.enableMessageEdit || global.botConfig.enableChannelEdit || global.botConfig.enableNotifer){liveStatus()} //starts live update loop
 	client.user.setActivity(global.botConfig.configs[global.botConfig.release].activity.text, {type: global.botConfig.configs[global.botConfig.release].activity.type});
@@ -125,6 +118,9 @@ async function liveStatus(){
 			var data = JSON.parse(value.data);
 			if (data.type == 'panel'){				
 				var res = await panelEdit.check(data, stringJSON)
+			}
+		}
+		catch(err){} //handle this error right
 				if (res.update){
 					toConsole.debug('Adding panel ' + data.messageID + ' to queue...')
 					statusQueue.push({
@@ -142,9 +138,7 @@ async function liveStatus(){
 			//Following section will be used after the addition of other status types
 			//else if (element.type == 'channel') {channelEdit.check(element)}
 			//else if (element.type == 'notifier') {liveNotifier.check(element)}
-		}
-		catch(err){global.toConsole.error('Failed at element checking loop')}
-	}
+			
 	statusCache.clear(); //clears cached server status data
 	global.toConsole.debug(statusQueue.length + ' elements in queue')
 	if(statusQueue.length){await processQueue();}
