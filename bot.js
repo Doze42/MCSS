@@ -121,6 +121,7 @@ async function liveStatus(){
 	var elements = new Map();
 	for (var i = 0; i < dbData.recordset.length; i++){if(client.guilds.cache.has(dbData.recordset[i].serverID)){elements.set(dbData.recordset[i].guid, dbData.recordset[i])}}
 	for await (const [key, value] of elements){
+		try{
 			var data = JSON.parse(value.data);
 			if (data.type == 'panel'){				
 				var res = await panelEdit.check(data, stringJSON)
@@ -141,6 +142,8 @@ async function liveStatus(){
 			//Following section will be used after the addition of other status types
 			//else if (element.type == 'channel') {channelEdit.check(element)}
 			//else if (element.type == 'notifier') {liveNotifier.check(element)}
+		}
+		catch(err){global.toConsole.error('Failed at element checking loop')}
 	}
 	statusCache.clear(); //clears cached server status data
 	global.toConsole.debug(statusQueue.length + ' elements in queue')
