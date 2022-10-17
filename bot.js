@@ -120,7 +120,7 @@ async function liveStatus(){
 				var res = await panelEdit.check(data, stringJSON)
 			}
 		}
-		catch(err){} //handle this error right
+		catch(err){continue;} //handle this error right
 				if (res.update){
 					toConsole.debug('Adding panel ' + data.messageID + ' to queue...')
 					statusQueue.push({

@@ -22,15 +22,8 @@ return new Promise(async(resolve, reject) => {
 
 		if ((new Date().getTime() - element.lastPing) >= 1209600000){
 				//todo: make the disable time configurable
-				
 			var disable = true;
-			var statEmbed = new Discord.MessageEmbed() 
-				.setTitle(stringJSON.automsg.disabled.header)
-				.setColor('E74C3C')
-				.setDescription(stringJSON.automsg.disabled.body)
-				.setFooter({text: stringJSON.embeds.footerText})
-				.setTimestamp()
-			if(element.embedTemplate.thumbnailEnable){statEmbed.setThumbnail('attachment://favicon.png')}
+			var statEmbed = richEmbeds.makeReply(stringJSON.automsg.disabled.deadPanel, 'error', stringJSON);
 		}
 		else {
 			if (global.statusCache.get(element.ip).online){
@@ -75,7 +68,11 @@ function update(data, client, stringJSON){
 					await message.edit({embeds: [data.embed]});
 					reject('remove');
 				}
-				
+				if (data.disable){
+					await message.removeAttachments(); //removes the favicon so it doesn't look weird
+					await message.edit({embeds: [data.embed]});
+					reject('remove');
+				}
 				await message.edit({embeds: [data.embed]})
 				resolve('Updated Sucessfully');
 			}
