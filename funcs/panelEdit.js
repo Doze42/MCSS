@@ -49,8 +49,8 @@ try{
 			}, stringJSON);
 		}
 	}
-		if(!isEqual({title: statEmbed.title, description: statEmbed.description, fields: statEmbed.fields, footer: statEmbed.footer.text},
-		{title: element.lastState.title, description: element.lastState.description, fields: element.lastState.fields, footer: element.lastState.footer.text}))
+		if(!isEqual({title: statEmbed.title.toString(), description: statEmbed.description.toString(), fields: statEmbed.fields, footer: statEmbed.footer.text.toString()},
+		{title: element.lastState.title.toString(), description: element.lastState.description.toString(), fields: element.lastState.fields, footer: element.lastState.footer.text.toString()}))
 		{return {update: true, data: statEmbed, disable: disable}}
 		else {return {update: false, disable: disable};}
 }

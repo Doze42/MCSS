@@ -145,9 +145,9 @@ async function liveStatus(){
 	statusCache.clear(); //clears cached server status data
 	global.toConsole.debug(statusQueue.length + ' elements in queue')
 	if(statusQueue.length){await processQueue();}
-	global.liveStatusTime = new Date().getTime() - refreshStart;
-	if (global.liveStatusTime > 45000) {liveStatus()}
-	if (global.liveStatusTime <= 45000) {setTimeout(() => {liveStatus()}, 45000)}
+	global.shardInfo.liveStatusTime = new Date().getTime() - refreshStart;
+	if (global.shardInfo.liveStatusTime > 45000) {liveStatus()}
+	if (global.shardInfo.liveStatusTime <= 45000) {setTimeout(() => {liveStatus()}, 45000)}
 }
 
 async function processQueue(){ //todo: add try/catch

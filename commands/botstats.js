@@ -35,6 +35,7 @@ async function run(client, interaction, stringJSON){
 			'**Guilds Handled: **' + client.guilds.cache.size,
 			"**Shard Uptime: **" + strings.elapsedTime(global.shardInfo.spawnTime).clean,
 			"**Commands Processed: **" + global.shardInfo.commandsRun,
+			"**Live Status Run Time: **" + global.shardInfo.liveStatusTime / 1000
 			].join("\n"), false)
 			.addField('***Module States***', '**Message Edit Live Status: **' + meState + '\n **Channel Edit Live Status: **' + ceState)
 			.setFooter({text:stringJSON.embeds.footerText})
