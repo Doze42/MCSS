@@ -75,16 +75,15 @@ sql.on('error', err => {
 
 process.on('unhandledRejection', err => { //Logs error and restarts shard on unhandledRejection
 	global.toConsole.error('Reloading Shard: ' + err);
-	try{fs.writeFileSync('./logs/shardCrash/' + new Date().toISOString() + '.log', err)}
-	catch(err){console.log(err)
-		global.toConsole.error('Failed to write error log')}
+	try{fs.writeFileSync('./logs/shardCrash/' + new Date().getTime() + '.log', err)}
+	catch(err){global.toConsole.error('Failed to write error log')}
 	client.shard.restart(client.shard.id);
 });
 
 client.on('rateLimit', (info) => {
   global.toConsole.error(`Rate limit hit ${info.timeDifference ? info.timeDifference : info.timeout ? info.timeout: 'Unknown timeout '}`)
 })
-throw 'crash'
+
 client.on("ready", async function(){
 	global.toConsole.info('Successfully logged in using Token ' + botConfig.release + ' at ' + new Date())
 	if(global.botConfig.enableMessageEdit || global.botConfig.enableChannelEdit || global.botConfig.enableNotifer){liveStatus()} //starts live update loop
