@@ -3,12 +3,9 @@ const { join } = require('path');
 const { Client, Intents } = require('discord.js');
 const chalk = require ('chalk')
 
-global.toConsole = {
-	log: function(msg, shardID = 'Unknown'){console.log(chalk.magenta('[Shard ' + shardID + '] ') + chalk.bgBlue('[log]') + ' ' + msg)},
-	info: function(msg, shardID = 'Unknown'){console.log(chalk.magenta('[Shard ' + shardID + '] ') + chalk.bgGreen('[info]') + ' ' + msg)},
-	error: function(msg, shardID = 'Unknown'){console.log(chalk.magenta('[Shard ' + shardID + '] ') + chalk.bgRed('[error]') + ' ' + msg)},
-	debug: function(msg, shardID = 'Unknown'){console.log(chalk.magenta('[Shard ' + shardID + '] ') + chalk.bgRed('[debug]') + ' ' + msg)}
-}
+global.shardCrashCount = 0;
+
+setInterval(function(){global.shardCrashCount = 0}, 86400000) //resets shard reconnect count daily
 
 const sharder = new ShardingManager(join(__dirname, 'bot'), {
 	clusterCount: 1,
@@ -20,4 +17,8 @@ const sharder = new ShardingManager(join(__dirname, 'bot'), {
 
 sharder.spawn();
 
-sharder.on('error', (err) => {console.log('Sharder Error: ' + err)});
+sharder.on('error', (err) => {
+	global.shardCrashCount++;
+	if (global.shardCrashCount > 500){process.exit(1)} //Kills process to avoid shard reconnection ratelimit
+	console.log('Sharder Error: ' + err)
+});

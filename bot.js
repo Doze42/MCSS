@@ -12,6 +12,7 @@ global.pool.connect();
 global.statusCache = new Map();
 var statusQueue = [];
 
+const chalk = require ('chalk')
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const DBL = require('dblapi.js');
@@ -58,21 +59,32 @@ module.exports = class extends BaseCluster {
 launch() {
 this.client.login(global.botConfig.configs[global.botConfig.release].token);
 var client = this.client
-console.info('Spawning Shard...')
+
+global.toConsole = { //Categorized Console Logging
+	log: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgBlue('[log]') + ' ' + msg)},
+	info: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgGreen('[info]') + ' ' + msg)},
+	error: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[error]') + ' ' + msg)},
+	debug: function(msg){console.log(chalk.magenta('[Shard ' + client.shard.id + '] ') + chalk.bgRed('[debug]') + ' ' + msg)}
+}
+
+global.toConsole.log('Spawning Shard...')
 
 sql.on('error', err => {
     console.log('SQL Error: ' + err, 'error');
 })
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', err => { //Logs error and restarts shard on unhandledRejection
 	global.toConsole.error('Reloading Shard: ' + err);
+	try{fs.writeFileSync('./logs/shardCrash/' + new Date().toISOString() + '.log', err)}
+	catch(err){console.log(err)
+		global.toConsole.error('Failed to write error log')}
 	client.shard.restart(client.shard.id);
 });
 
 client.on('rateLimit', (info) => {
   global.toConsole.error(`Rate limit hit ${info.timeDifference ? info.timeDifference : info.timeout ? info.timeout: 'Unknown timeout '}`)
 })
-
+throw 'crash'
 client.on("ready", async function(){
 	global.toConsole.info('Successfully logged in using Token ' + botConfig.release + ' at ' + new Date())
 	if(global.botConfig.enableMessageEdit || global.botConfig.enableChannelEdit || global.botConfig.enableNotifer){liveStatus()} //starts live update loop
@@ -100,7 +112,7 @@ try {
 	else if (interaction.commandName == 'help'){commands.help.run(client, interaction, stringJSON);}
 	//else if (interaction.commandName == 'autocnl'){commands.autocnl.run(client, interaction, stringJSON);}
 	else if (interaction.commandName == 'test'){
-	console.log(!client.guilds.cache.has(interaction.guildId))
+
 	}
 }
 catch (err){global.toConsole.error("Interaction Failed: " + err)}

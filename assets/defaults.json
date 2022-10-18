@@ -90,9 +90,9 @@
 		"lang": "en",
 		"liveElementCount": 0,
 		"limits": {
-			"liveElements": 2000,
-			"savedServers": 5,
-			"savedEmbedTemplates": 7
+			"liveElements": 25,
+			"savedServers": 10,
+			"savedEmbedTemplates": 10
 		},
 		"ephemeral": {
 			"statusPanel": false,

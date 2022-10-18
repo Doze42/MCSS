@@ -1,5 +1,5 @@
 {
-	"botver": "3.0 (Beta Build 170)",
+	"botver": "3.0 (Release Candidate 1)",
 	"release": 2,
 	"debugMode": 1,
 	"cmdCD": 7000,
@@ -16,7 +16,7 @@
 		"database": "MCSS",
 		"options": {"enableArithAbort": false}},
 		"token": "NzkwMDc1Nzk2MDQyOTQwNDQ4.Gfni2-.lpUr73JRyr-JFs20kR0Yg513-SW10H2z4hg04M",
-		"activity": {"text": "put something here idk", "type": "WATCHING"},
+		"activity": {"text": "for slash commands | Back and better than ever!", "type": "WATCHING"},
 		"supportServer": "799882620913319957",
 		"suggestionChannel": "799890506757963857",
 		"expressPort": 4889,
