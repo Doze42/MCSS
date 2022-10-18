@@ -70,8 +70,13 @@ global.toConsole = { //Categorized Console Logging
 global.toConsole.log('Spawning Shard...')
 
 sql.on('error', err => {
-    console.log('SQL Error: ' + err, 'error');
+    global.toConsole.error('SQL Error: ' + err, 'error');
 })
+
+global.pool.on('error', err => {
+    global.toConsole.error('Pool Error: ' + err, 'error');
+})
+
 
 process.on('unhandledRejection', err => { //Logs error and restarts shard on unhandledRejection
 	global.toConsole.error('Reloading Shard: ' + err);

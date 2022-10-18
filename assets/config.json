@@ -1,6 +1,6 @@
 {
-	"botver": "3.0 (Release Candidate 1)",
-	"release": 2,
+	"botver": "3.0.1",
+	"release": 0,
 	"debugMode": 1,
 	"cmdCD": 7000,
 	"sugCD": 900000,
@@ -14,7 +14,7 @@
 		"user": "MCdba",
 		"password": "Comment678",
 		"database": "MCSS",
-		"options": {"enableArithAbort": false}},
+		"options": {"enableArithAbort": false, "trustServerCertificate": true}},
 		"token": "NjUyNzI2MTA3NTM1MzEwODU5.GBDYLH.t5i4DNWPejCiB5elYR5f8RXjV9Z-t0ch5EbWmY",
 		"activity": {"text": "for slash commands | Back and better than ever!", "type": "WATCHING"},
 		"supportServer": "799882620913319957",
