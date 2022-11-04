@@ -129,7 +129,7 @@
 			"domain": "minefort.com"
 		},
 		{
-			"trigger": "This server is OFFLINE!"
+			"trigger": "This server is OFFLINE!",
 			"domain" : "falixserver.net"
 		}
 	]
