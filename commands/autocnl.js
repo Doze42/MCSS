@@ -2,14 +2,14 @@
 
 const richEmbeds = require('../funcs/embeds'); //embed generation
 module.exports = {run}
-const sql = require('mssql')
+const sql = require('mariadb')
 const queryServer = require('../funcs/queryServer.js');
 const Discord = require('discord.js') //discord.js for embed object
 const strings = require('../funcs/strings'); //public string manipulation functions
 const dns = require('node:dns');
 async function run(client, interaction, stringJSON){
 try{
-var dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset[0];
+var dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).slice(0, -1)[0];
 global.toConsole.log('/autcnl run by ' + interaction.user.username + '#' + interaction.user.discriminator + ' (' + interaction.user.id + ')')
 global.shardInfo.commandsRun++
 var serverIP = interaction.options.getString('address');
@@ -59,7 +59,7 @@ var stateInfo = {online: false}
 channel.edit({name: channelName}, stringJSON.autocnl.editReason)
 
 if (serverPort){serverIP = serverIP += (':' + serverPort)}
-dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset[0]; //refreshes data to avoid conflict
+dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).slice(0, -1)[0]; //refreshes data to avoid conflict
 var liveArr = JSON.parse(dbData.LIVE)
 liveArr.push({
 	"type": "channel",

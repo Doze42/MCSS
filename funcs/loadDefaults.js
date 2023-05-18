@@ -1,12 +1,14 @@
-const sql = require('mssql');
-const fs = require('fs');
 module.exports = {addServer};
-const defaults = JSON.parse(fs.readFileSync("./assets/defaults.json")); //loads default values from disk
+const sql = require('mssql')
 
-async function addServer(id){
+async function addServer(id, defaults){
 	return new Promise(async(resolve, reject) => {
-		try{
-			await new sql.Request(global.pool).query("INSERT INTO SERVERS (SERVER_ID, EMBEDS, CONFIG, SERVERS, COMPAT) VALUES ('" + id + "', N'" + JSON.stringify(defaults.embeds) + "', N'" + JSON.stringify(defaults.config) + "', N'" + JSON.stringify(defaults.servers) + "', N'" + JSON.stringify(defaults.compat) + "')")
+		try{ 
+			// {let conn = await global.pool.getConnection();
+			//await conn.query(("INSERT INTO SERVERS VALUES ('" + id + "', '" + JSON.stringify(defaults.servers) + "', '" + JSON.stringify(defaults.embeds) + "' ,'" + JSON.stringify(defaults.config) + "', '" + JSON.stringify(defaults.compat) + "')").replace(/\\n/g, "\\\\n"))
+			// conn.release();}
+			let query = ("INSERT INTO SERVERS VALUES ('" + id + "', '" + JSON.stringify(defaults.servers) + "', '" + JSON.stringify(defaults.embeds) + "' ,'" + JSON.stringify(defaults.config) + "', '" + JSON.stringify(defaults.compat) + "')")
+			await new sql.Request(global.pool).query(query)
 			resolve ('Server ' + id + ' added to database.')
 		}
 		catch(err){

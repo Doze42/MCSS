@@ -1,0 +1,162 @@
+{
+	"cmdHandler": {
+	  "interactionFailed": "Une erreur est surveue et l'exécution de la commande à échoué. Veuillez réessayer.",
+	  "databaseAddFailed": "Une erreur est survenue lors du chargement de la configuration par défaut. Veuillez réessayer."
+	},
+	"servers": {
+	  "listHeading": "Serveurs sauvegardés pour ",
+	  "serverRemoved": "Ce serveur a été supprimé de la base de données avec succès : ",
+	  "serverAdded": "Serveur ajouté à la base de données avec succès.",
+	  "maxServers": "Seulement 5 serveurs peuvent être sauvegardés par serveur. Veuillez en supprimer un avant de continuer.",
+	  "aliasNotFound": "Serveur sauvegardé sous cet alias introuvable.",
+	  "noSaved": "Aucun serveur sauvegardé n'a été configuré pour ce serveur.",
+	  "aliasLength": "Les alias des serveurs ne doivent pas dépasser les 50 caractères.",
+	  "listDefault": " **(Par défaut)**",
+	  "aliasTaken": "Un serveur sauvegardé sous cet alias existe déjà pour ce serveur.",
+	  "ipLength": "Le nom du domaine / l'addresse IP du serveur doit contenir entre 5 et 153 caractères. Veuillez vérifier votre commande et réessayer.",
+	  "badPort": "L'argument **port** ne doit contenir qu'un entier entre 1 et 65535. Veuillez vérifier cotre commande et réessayer.",
+	  "server": "Serveur"
+	},
+	"embedsCommand": {
+	  "aliasLength": "L'alias de l'intégration doit faire moins de 50 charactères.",
+	  "maxTemplates": "Seulement 10 modèles d'intégrations sont autorisés par serveur. Veuillez en supprimer un avant de countinuer.",
+	  "aliasNotFound": "Impossible de localiser un modèle d'intégration sauvegardé sous cet alias.",
+	  "aliasTaken": "Un modèle d'intégration avec cet alias existe déjà dans cette guilde.",
+	  "listDefault": " **(Défaut)**",
+	  "listHeading": "Modèles d'intégration pour ",
+	  "templateRemoved": "Retiré le modèle suivant de la base de données avec succès : ",
+	  "templateAdded": "Ajouté le modèle à la base de données avec succès.",
+	  "noBlank": "Vous devez spécifier un en-tête, pied de page et un corps de texte pour les modèles « en ligne » et « hors ligne ».",
+	  "removeDefault": "Vous ne pouvez pas retirer le modèle par défaut.",
+	  "defaultPlayerHeading": "Joueurs :",
+	  "invalidHexCode": "Le code couleur entré est invalide. Les codes clouleur doivent commencer par un # et contenir des caractères hexadécimaux.",
+	  "embed": "Intégration",
+	  "previewOnlineSampleData": {
+		"ip": "exemple.fr",
+		"type": "Java",
+		"motd": "Un Serveur Minecraft",
+		"version": "1.7.10",
+		"players": {
+		  "online": 3,
+		  "max": 10,
+		  "list": [
+			{
+			  "name": "Joueur 1"
+			},
+			{
+			  "name": "Joueur 2"
+			},
+			{
+			  "name": "Joueur 3"
+			}
+		  ]
+		},
+		"latency": 128
+	  },
+	  "previewOfflineSampleData": {
+		"ip": "example.fr",
+		"error": "Impossible d'atteindre le serveur"
+	  }
+	},
+	"compatCommand": {
+	  "triggerAdded": "Ajouté l'amorce de compatibilité à la base de données avec succès.",
+	  "badIndex": "Impossible de localiser une amorce de compatibilité avec cet index.",
+	  "triggerRemoved": "Retiré l'amorce de compatibilité avec succès.",
+	  "listHeading": "Amorces de compatilibité pour  ",
+	  "entry": "Entrée",
+	  "ipLength": "Votre adresse IP/nom d'hôte doit faire entre 5 et 253 caractères. Veuillez vérifier votre commande et réessayer.",
+	  "triggerLength": "L'amorce de compatibilité doit faire moins de 50 caractères.",
+	  "maxTriggers": "Seuls 25 amorces de compatibilité sont autorisées par guilde. Veuillez en supprimer une avant de continuer.",
+	  "noSaved": "Aucune amorce pour le mode Compatilibité n'a été configurée dans cette guilde."
+	},
+	"lang": {
+	  "changeSuccess": "Langue changée avec succès"
+	},
+	"invite": {
+	  "embedBody": "Vous voulea ajouter Minecraft Server Status à votre serveur ? \n [Cliquez ici pour inviter le bot](https://discord.com/api/oauth2/authorize?client_id=652726107535310859&permissions=52304&scope=bot) \n \n Intéressé(e) dans le programme bêta ? \n [Appuyez ici pour inviter la version bêta du bot](https://123computer.net/mcss/beta)"
+	},
+	"help": {
+	  "embedTitle": "Cliquez ici pour lire la documentation !",
+	  "embedBody": "Vous avez toujours besoin d'aide ? \n [Cliquez ici pour rejoindre le serveur de support !](https://discord.gg/szr7VgVxzQ) \n \n [Jetez un œuil à notre tutoriel vidéo !](https://123computer.net/mcss/tutorial)",
+	  "docsLink": "https://123computer.net/mcss/docs/en"
+	},
+	"status": {
+	  "badPort": "L'argument **port** doit être compris entre 1 et 65535. Veuillez vérifier cotre commande et réessayer.",
+	  "ipLength": "Le nom du domaine / l'addresse IP du serveur doit contenir entre 5 et 153 caractères. Veuillez vérifier votre commande et réessayer.",
+	  "noServer": "Pas de serveur spécifié. Veuille utiliser l'option **serveur** pour sélectionner un serveur sauvegardé par son aliass alias ou utiliser les options **addresse** er **port** pour spécifier un autre serveur.",
+	  "aliasNotFound": "Impossible de localiser une serveur sauvegardé sous cet alias.",
+	  "compatOffline": "Mode Compatibilité déclanché"
+	},
+	"automsg": {
+	  "noServer": "Pas de serveur spécifié. Veuille utiliser l'option **serveur** pour sélectionner un serveur sauvegardé par son aliass alias ou utiliser les options **addresse** er **port** pour spécifier un autre serveur.",
+	  "aliasNotFound": "Incapable de trouver un serveur sous cet alias.",
+	  "embedNotFound": "Impossible de localiser un modèle d'embed sous cet alias.",
+	  "success": "Le Suivi de statut en direct a été généré avec succès.",
+	  "defaultTemplateLive": "Modèle par défaut (Live)",
+	  "channelType": "La commande **automsg** ne peut être utilisée que dans les salons textes normaux de serveurs.",
+	  "maxElements": "Le nombre maximal d'éléments de Suivi en direct de ce serveur a été atteint. Veuillez en supprimer un et recommencer ou demander des limites plus élevées dans le serveur de support.",
+	  "badThumbnail": "Votre vignette doit faire moins de 5Mo et être dans un format BMP, GIF, JPEG ou PNG.",
+	  "disabled": {
+		"deadPanel": "Le serveur Minecraft a été impossible à atteindre pendant plus de deux semaines et le Suivi de statut en direct a été désactivé.",
+		"channelType": "Le type de salon a été changé et le Suivi en direct a été désactivé. Cette fonctionnalité n'est compatible qu'avec les salons texte."
+	  }
+	},
+	"channelType": "Le type de ce salon a été changé et le statut en direct a été désactivé. Cette fonctionnalité n'est compatible qu'avec les salons textuels.",
+	"autocnl": {
+	  "editReason": "Statut mis à jour"
+	},
+	"embeds": {
+	  "footerText": "Généré par Minecraft Server Status Bot"
+	},
+	"reply": {
+	  "error": "Erreur",
+	  "notif": "Information"
+	},
+	"permissions": {
+	  "blacklisted": "Vous êtes banni su service Minecraft Server Status. Raison : ",
+	  "restricted": "Vous n'avez pas la permission de faire cette commande.",
+	  "noDM": "Cette commande ne peut pas être utilisé en Message Privé.",
+	  "botScope": "Cette fonctionnalité requière la présence du bot sur le serveur. Veuillez réinviter l'application avec le scope bot activé.",
+	  "channelPerms": "Impossible de traiter votre requête can le bot n'a pas les permissions **Envoyer des message**, **Intégrer des liens** ou **Joindre des fichiers**. Veuillez vérifier que le bot a ces permissions ou contacter le personnel du serveur.",
+	  "manageChannel": "Impossible de traiter votre requête car le bot n'a pas la permission **Gérer les salons**. Veuillez vérifier que le bot a cette permission ou contacter le personnel du serveur."
+	},
+	"admin": {
+	  "respawningAll": "Recharge de tous les fragments.",
+	  "respawnOne": "Recharge du fragment "
+	},
+	"settings": {
+	  "lang": "La langue a été changée en **français**."
+	},
+	"botstats": {
+	  "badID": "ID de fragment invalide",
+	  "info": {
+		"header": "***Statistiques du bot***",
+		"servers": "**Serveurs : **",
+		"shards": "**Fragments : **",
+		"version": "**Version du bot : **",
+		"uptime": "**Temps de fonctionnement du bot : **",
+		"crashCount": "**Compte de recharges de fragments : **"
+	  },
+	  "serverPerf": {
+		"header": "***Performances du serveur***",
+		"server": "**Serveur : **",
+		"cpu": "**CPU : **",
+		"ram": "**Mémoire : **"
+	  },
+	  "shardInfo": {
+		"header": "***Information de l'éclat***",
+		"id": "**ID de l'éclat : **",
+		"guilds": "**Guildes gérés : **",
+		"uptime": "**Temps de fonctionnement de l'éclat : **",
+		"commands": "**Commandes traitées (depuis dernière rechgarge) : **",
+		"liveTime": "**Temps de recharge du Status en direct (secondes) : **"
+	  },
+	  "modules": {
+		"header": "***États du module***",
+		"panelEdit": "**Panel Edit Live Status: **",
+		"channelEdit": "**Channel Edit Live Status: **",
+		"notifier": "**Notifier Live Status: **",
+		"concurrentPing": "**Concurrent Server Query: **"
+	  }
+	}
+  }

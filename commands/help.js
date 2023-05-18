@@ -1,21 +1,22 @@
 //Help Command
-const Discord = require('discord.js') //discord.js for embed object
+const { EmbedBuilder } = require('discord.js'); //discord.js for embed object
 
 module.exports = {run}
 
 async function run(client, interaction, stringJSON){
 try{
-global.toConsole.log('/help run by ' + interaction.user.username + '#' + interaction.user.discriminator + ' (' + interaction.user.id + ')')
-global.shardInfo.commandsRun++
-await interaction.reply({
-	embeds:[ 
-	new Discord.MessageEmbed() //create embed for suggestion
-		.setTitle(stringJSON.help.embedTitle)
-		.setColor(3447003)
-		.setURL(stringJSON.help.docsLink)
-		.setFooter({text: stringJSON.embeds.footerText})
-		.setTimestamp()
-		.setDescription(stringJSON.help.embedBody)
+	global.toConsole.log('/help run by ' + interaction.user.username + '#' + interaction.user.discriminator + ' (' + interaction.user.id + ')')
+	global.shardInfo.commandsRun++
+	await interaction.reply({		
+		embeds:[ 
+			new EmbedBuilder({
+				"color": 3447003,
+				"title": stringJSON.help.embedTitle,
+				"url": stringJSON.help.docsLink,
+				"footer": {text: stringJSON.embeds.footerText},
+				"timestamp": new Date().toISOString(),
+				"description": stringJSON.help.embedBody
+			}).data 
 		]
 	})
 }

@@ -1,58 +1,95 @@
 {
-	"botver": "3.0.1",
+	"botver": "3.1",
 	"release": 0,
 	"debugMode": 1,
+	"shardCount": 15,
+	"crashLimit": 600,
+	"maxAttachmentSize": 5000000,
 	"cmdCD": 7000,
 	"sugCD": 900000,
+	"concurrentPing": {
+		"enable": false,
+		"pings": 10
+	},
 	"enableMessageEdit": true,
 	"enableChannelEdit": false,
 	"enableNotifier": false,
 	"configs":
-[
-	{
-		"dbConfig": {"server": "localhost\\SQLEXPRESS",
-		"user": "MCdba",
-		"password": "Comment678",
-		"database": "MCSS",
-		"options": {"enableArithAbort": false, "trustServerCertificate": true}},
-		"token": "NjUyNzI2MTA3NTM1MzEwODU5.GBDYLH.t5i4DNWPejCiB5elYR5f8RXjV9Z-t0ch5EbWmY",
-		"activity": {"text": "for slash commands | Back and better than ever!", "type": "WATCHING"},
-		"supportServer": "799882620913319957",
-		"suggestionChannel": "799890506757963857",
-		"expressPort": 4889,
-		"liveQueuePause": 2000,
-		"liveElementTimeout": 6000,
-		"liveElementMaxFails": 15
-	},
-	{
-		"dbConfig": {"server": "localhost\\SQLEXPRESS",
-		"user": "MCbeta",
-		"password": "Comment678",
-		"database": "MCSS_BETA",
-		"options": {"enableArithAbort": false, "trustServerCertificate": true}},
-		"token": "NzkwMDc1Nzk2MDQyOTQwNDQ4.GaRy0j.-yyyS9ugSw7BRuEH6ruOu07KdD8oTBWAFXgkyw",
-		"activity": {"text": "my rise from the dead", "type": "WATCHING"},
-		"supportServer": "799882620913319957",
-		"suggestionChannel": "844819088499933204",
-		"expressPort": 4890,
-		"liveQueuePause": 2000,
-		"liveElementTimeout": 6000,
-		"liveElementMaxFails": 15
-	},
-	{
-		"dbConfig": {"server": "localhost\\SQLEXPRESS",
-		"user": "MCbeta",
-		"password": "Comment678",
-		"database": "MCSS_BETA",
-		"options": {"enableArithAbort": false, "trustServerCertificate": true}},
-		"token": "NjgxMzU1MDczMTc5MDkwOTY1.Xngc8g.9ATtVcd-iTw0oHUFTJ-TsUMuR2Q",
-		"activity": {"text": "Doze work on me", "type": "WATCHING"},
-		"supportServer": "690081112164139040",
-		"suggestionChannel": "795926682326401044",
-		"expressPort": 4891,
-		"liveQueuePause": 2000,
-		"liveElementTimeout": 6000,
-		"liveElementMaxFails": 3
-	}
-]
+	[
+		{
+			"dbConfig": {
+				"host": "192.168.0.6",
+				"user": "mcss_alpha",
+				"password": "xQ365BB$Eyq0",
+				"database": "mcss_alpha",
+				"connectionLimit": 25
+			},
+			"mssql": {
+				"server": "localhost\\SQLEXPRESS",
+				"port": 1433,
+				"user": "MCdba",
+				"password": "Comment678",
+				"database": "MCSS",
+				"options": {"enableArithAbort": false, "trustServerCertificate": true}
+			},
+			"token": "NjUyNzI2MTA3NTM1MzEwODU5.GBDYLH.t5i4DNWPejCiB5elYR5f8RXjV9Z-t0ch5EbWmY",
+			"activity": {"text": "for slash commands | Back and better than ever!", "type": "WATCHING"},
+			"supportServer": "799882620913319957",
+			"suggestionChannel": "799890506757963857",
+			"expressPort": 4889,
+			"liveQueuePause": 3000,
+			"liveElementTimeout": 6000,
+			"liveElementMaxFails": 15
+		},
+		{
+			"dbConfig": {
+				"host": "192.168.0.6",
+				"user": "mcss_beta",
+				"password": "6Ry85#^EtnSE",
+				"database": "mcss_beta",
+				"connectionLimit": 25
+			},
+			"mssql": {
+				"server": "localhost\\SQLEXPRESS",
+				"port": 1433,
+				"user": "MCbeta",
+				"password": "Comment678",
+				"database": "MCSS_BETA",
+				"options": {"enableArithAbort": false, "trustServerCertificate": true}
+			},
+			"token": "NzkwMDc1Nzk2MDQyOTQwNDQ4.GBjx9F.KTWGgdfkE-Ozq6xcpB9VMbSYBiEGHLfOn6EKFg",
+			"activity": {"text": "my rise from the dead", "type": "WATCHING"},
+			"supportServer": "799882620913319957",
+			"suggestionChannel": "844819088499933204",
+			"expressPort": 4890,
+			"liveQueuePause": 2000,
+			"liveElementTimeout": 6000,
+			"liveElementMaxFails": 15
+		},
+		{
+			"dbConfig": {
+				"host": "192.168.0.6",
+				"user": "mcss_alpha",
+				"password": "xQ365BB$Eyq0",
+				"database": "mcss_alpha",
+				"connectionLimit": 10
+			},
+			"mssql": {
+				"server": "192.168.0.3",
+				"port": 1433,
+				"user": "mcss_alpha",
+				"password": "xQ365BB$Eyq0",
+				"database": "MCSS_ALPHA",
+				"options": {"enableArithAbort": false, "trustServerCertificate": true}
+			},
+			"token": "NjgxMzU1MDczMTc5MDkwOTY1.Xngc8g.9ATtVcd-iTw0oHUFTJ-TsUMuR2Q",
+			"activity": {"text": "Doze work on me", "type": "WATCHING"},
+			"supportServer": "690081112164139040",
+			"suggestionChannel": "795926682326401044",
+			"expressPort": 4891,
+			"liveQueuePause": 2000,
+			"liveElementTimeout": 6000,
+			"liveElementMaxFails": 1
+		}
+	]
 }

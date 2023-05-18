@@ -1,0 +1,105 @@
+{
+	"embeds": {
+		"default": 0,
+		"templates": [{
+				"alias": "Default Template",
+				"thumbnailEnable": true,
+				"online": {
+					"header": "Status for %ip%",
+					"footer": "Minecraft Server Status",
+					"body": ":green_circle: Server is online \n \n **Type:** %type% \n **MOTD:** %motd% \n **Version:** %version% \n **Maximum Players:** %max% \n **Currently Online:** %now% \n **Latency:** %ping% ms \n **Open Slots:** %open%",
+					"playersList": {
+						"header": "Players:",
+						"display": true
+					},
+					"timestampEnable": true,
+					"embedColor": "33CC66"
+				},
+				"offline": {
+					"header": "Unable to retrieve status.",
+					"footer": "Minecraft Server Status",
+					"timestampEnable": true,
+					"body": ":red_circle: Server is offline \n Error: %error%",
+					"embedColor": "E74C3C"
+				}
+			},
+			{
+				"alias": "Default Template (Live)",
+				"thumbnailEnable": true,
+				"online": {
+					"header": "Status for %ip%",
+					"footer": "Last Updated",
+					"body": ":green_circle: Server is online \n \n **Type:** %type% \n **MOTD:** %motd% \n **Version:** %version% \n **Maximum Players:** %max% \n **Currently Online:** %now% \n **Open Slots:** %open%",
+					"playersList": {
+						"header": "Players:",
+						"display": true
+					},
+					"timestampEnable": true,
+					"embedColor": "33CC66"
+				},
+				"offline": {
+					"header": "Unable to retrieve status.",
+					"footer": "Last Updated",
+					"timestampEnable": true,
+					"body": ":red_circle: Server is offline \n Error: %error%",
+					"embedColor": "E74C3C"
+				}
+			}
+		]
+	},
+	"config": {
+		"lang": "en",
+		"settingsPermissionLevel": ["ADMINISTRATOR"],
+		"deletionFailureCount": 0,
+		"limits": {
+			"liveElements": 25,
+			"savedServers": 10,
+			"savedEmbedTemplates": 10,
+			"compatibilityTriggers": 25
+		},
+		"ephemeral": {
+			"statusPanel": false,
+			"checkPanel": false
+		}
+	},
+	"servers": {
+		"default": 0,
+		"servers": []
+	},
+	"compat": [{
+			"trigger": "This server is offline.",
+			"domain": "aternos.me",
+			"standard": true
+		},
+		{
+			"trigger": "Server not found.",
+			"domain": "aternos.me",
+			"standard": true
+		},
+		{
+			"trigger": "Start your server at www.minefort.com",
+			"domain": "minefort.com",
+			"standard": true
+		},
+		{
+			"trigger": "This server is currently starting.",
+			"domain": "aternos.me",
+			"standard": true
+		},
+		{
+			"trigger": "This server is OFFLINE!",
+			"domain" : "falixserver.net",
+			"standard": true
+		},
+		{
+			"trigger": "This server is OFFLINE!",
+			"domain" : "falixserver.net",
+			"standard": true
+		},
+		{
+			"trigger": "Dedicated Server",
+			"domain" : "apexmc.co",
+			"standard": true
+		}
+	]
+}

@@ -1,6 +1,6 @@
 //Invite Command
 const fs = require('fs');
-const Discord = require('discord.js') //discord.js for embed object
+const { EmbedBuilder, AttachmentBuilder } = require('discord.js'); //discord.js for embed object
 const staticImages = JSON.parse(fs.readFileSync("./assets/static_images.json")); //Base64 encoded images
 
 module.exports = {run}
@@ -10,14 +10,16 @@ try{
 global.toConsole.log('/invite run by ' + interaction.user.username + '#' + interaction.user.discriminator + ' (' + interaction.user.id + ')')
 global.shardInfo.commandsRun++
 await interaction.reply({
-	files: [new Discord.MessageAttachment(Buffer.from(staticImages.mcss_logo, 'base64'), 'logo.png')],
+	files: [new AttachmentBuilder(Buffer.from(staticImages.mcss_logo, 'base64'), {name: 'logo.png'})],
 	embeds:[ 
-	new Discord.MessageEmbed() //create embed for suggestion
-		.setColor(3447003)
-		.setFooter({text: stringJSON.embeds.footerText})
-		.setTimestamp()
-		.setDescription(stringJSON.invite.embedBody)
-		.setThumbnail('attachment://logo.png')]
+		new EmbedBuilder({
+			"color": 3447003,
+			"footer": {text: stringJSON.embeds.footerText},
+			"timestamp": new Date().toISOString(),
+			"description": stringJSON.invite.embedBody,
+			"thumbnail": {"url": "attachment://logo.png"}
+		}).data
+	]
 	})
 }
 catch(err){

@@ -11,6 +11,13 @@ if (typeof description == 'string'){stg = description;}
 stg = stg.replace(/§4|§c|§6|§e|§2|§a|§b|§3|§1|§9|§d|§5|§f|§7|§8|§0|§r|§l|§o|§n|§m|§k/g, ""); //removes all formatting characters from motd
 return stg;}
 
+function realEscape(str) {
+  if (typeof str !== "string")
+    throw new Error("Non-string provided");
+
+  return str.replace(/[^a-zA-Z0-9@+_\- ]/g, unsafe => `%${unsafe.charCodeAt(0).toString(16)};`);
+}
+
 function insertData(string, data){
 	if (data.ip){string = string.replace(/%ip%/g, data.ip);}
 	if (data.type){string = string.replace(/%type%/g, data.type);}
@@ -88,4 +95,4 @@ for (var i = 0; i < blockedStrings.length; i++){
 return {"passed": true};
 }
 
-module.exports = {cleanmotd, cleanString, elapsedTime, checkChars, truncate, checkSuggestion, insertData}
+module.exports = {cleanmotd, cleanString, elapsedTime, checkChars, truncate, checkSuggestion, insertData, realEscape}

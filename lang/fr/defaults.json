@@ -1,0 +1,90 @@
+{
+	"embeds": {
+		"default": 0,
+		"templates": [{
+				"alias": "Default Template",
+				"default": true,
+				"thumbnailEnable": true,
+				"online": {
+					"header": "Statut de %ip%",
+					"footer": "Minecraft Serveur Status",
+					"body": ":green_circle: Le serveur est en ligne \n \n **Type : ** %type% \n **MOTD du serveur : ** %motd% \n **Version du jeu : **%version% \n **Joueurs maximum:** %max% \n **Il y a ** %now% joueurs connectés \n **Latence du serveur:** %ping% ms \n **%open%** joueurs peuvent encore se connecter",
+					"playersList": {
+						"header": "Joueurs:",
+						"display": true
+					},
+					"timestampEnable": true,
+					"embedColor": "33CC66"
+				},
+				"offline": {
+					"header": "Impossible de récupérer le statut.",					
+					"footer": "Minecraft Serveur Status",					
+					"timestampEnable": true,
+					"body": ":red_circle: Le serveurs est eteint \n Error: %error%",
+					"embedColor": "E74C3C"
+				}
+			},
+			{
+				"alias": "Default Template (Live)",
+				"default": false,
+				"thumbnailEnable": true,
+				"online": {
+					"header": "Statut de %ip%",
+					"footer": "Dernière mise à jour",						
+					"body": ":green_circle: Le serveur est en ligne \n \n **Type:** %type% \n **MOTD:** %motd% \n **Version du jeu :** %version% \n **Joueurs maximum:** %max% \n Il y a **%now%** joueurs connectés",
+					"playersList": {
+						"header": "Joueurs : ",
+						"display": true
+					},
+					"timestampEnable": true,
+					"embedColor": "33CC66"
+				},
+				"offline": {
+					"header": "Impossible de récupérer le statut.",
+					"footer": "Dernière mise à jour",
+					"timestampEnable": true,
+					"body": ":red_circle: Le serveurs est éteint \n Erreur: %error%",
+					"embedColor": "E74C3C"
+				}
+			}
+		]
+	},
+	"config": {
+		"lang": "fr",
+		"liveElementCount": 0,
+		"limits": {
+			"liveElements": 25,
+			"savedServers": 10,
+			"savedEmbedTemplates": 10
+		},
+		"ephemeral": {
+			"statusPanel": false,
+			"checkPanel": false
+		}
+	},
+	"servers": {
+		"default": 0,
+		"servers": []
+	},
+	"compat": [{
+			"trigger": "This server is offline.",
+			"domain": "aternos.me"
+		},
+		{
+			"trigger": "Server not found.",
+			"domain": "aternos.me"
+		},
+		{
+			"trigger": "Start your server at www.minefort.com",
+			"domain": "minefort.com"
+		},
+		{
+			"trigger": "This server is currently starting.",
+			"domain": "aternos.me"
+		},
+		{
+			"trigger": "This server is OFFLINE!",
+			"domain" : "falixserver.net"
+		}
+	]
+}

@@ -4,19 +4,22 @@ const fs = require('fs')
 const queryServer = require('../funcs/queryServer.js');
 const richEmbeds = require('../funcs/embeds') //embed generation
 const compat = require ('../funcs/compat.js');
-const sql = require('mssql')
 const strings = require('../funcs/strings.js') //string manipulation
-const Discord = require('discord.js') //discord.js for embed object
+const { AttachmentBuilder } = require('discord.js'); //discord.js for embed object
+const sql = require('mssql') //mssql
 module.exports = {run}
 
 async function run(client, interaction, stringJSON){
 	try{
 		global.shardInfo.commandsRun++
 		global.toConsole.log('/status run by ' + interaction.user.username + '#' + interaction.user.discriminator + ' (' + interaction.user.id + ')')
-		var dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset[0]
+		//{let conn = await global.pool.getConnection();
+		//var dbData = (await conn.query("SELECT * from SERVERS WHERE SERVER_ID = " + interaction.guildId + " LIMIT 1"))[0]
+		//conn.release();}
+		var dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + interaction.guildId)).recordset[0] //mssql
 		var serverIP = interaction.options.getString('address')
 		var serverPort = interaction.options.getInteger('port')
-		var serverAlias = interaction.options.getString('server');
+		var serverAlias = interaction.options.getString('server');     
 		var guildServers = JSON.parse(dbData.SERVERS)
 		if (!serverIP && !serverAlias && !guildServers.servers.length){return interaction.reply({embeds:[richEmbeds.makeReply(stringJSON.status.noServer, 'error', stringJSON)], ephemeral: true})}
 		if (!serverIP && !serverAlias){serverAlias = guildServers.servers[guildServers.default].alias}
@@ -50,7 +53,8 @@ async function run(client, interaction, stringJSON){
 				format: embedData
 			}, stringJSON)
 
-			if (embedData.thumbnailEnable){await interaction.editReply({embeds:[statEmbed], files: [new Discord.MessageAttachment(Buffer.from(bufferSource, 'base64'), 'favicon.png')]})}
+			if (embedData.thumbnailEnable){await interaction.editReply({embeds:[statEmbed], files: [new AttachmentBuilder(Buffer.from(bufferSource, 'base64'), {name: 'favicon.png'})]})}
+			else {await interaction.editReply({embeds:[statEmbed]})}
 		}
 		catch(err){ //Server Offline
 			var statEmbed = richEmbeds.statusEmbed({
@@ -59,7 +63,8 @@ async function run(client, interaction, stringJSON){
 				data: {error: err, hostname: serverIP},
 				format: embedData
 		}, stringJSON);
-		if (embedData.thumbnailEnable){await interaction.editReply({embeds:[statEmbed], files: [new Discord.MessageAttachment(Buffer.from(global.staticImages.pack_greyscale, 'base64'), 'favicon.png')]})}
+		if (embedData.thumbnailEnable){await interaction.editReply({embeds:[statEmbed], files: [new AttachmentBuilder(Buffer.from(global.staticImages.pack_greyscale, 'base64'), {name: 'favicon.png'})]})}
+		else {await interaction.editReply({embeds:[statEmbed]})}
 		}
 	}
 	catch(err){

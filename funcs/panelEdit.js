@@ -4,8 +4,8 @@ const queryServer = require('../funcs/queryServer.js'); //ping library
 const richEmbeds = require('../funcs/embeds'); //embed generation
 const isEqual = require('lodash.isequal');
 const Discord = require('discord.js') //discord.js for embed object
-const sql = require('mssql')
 const compat = require ('../funcs/compat.js');
+const sql = require ('mssql');
 
 async function check(element, stringJSON){
 return new Promise(async(resolve, reject) => {
@@ -13,6 +13,9 @@ return new Promise(async(resolve, reject) => {
 		if (!global.statusCache.has(element.ip)){		
 			try {
 				var pingResults = await queryServer(element.ip)
+				//{let conn = await global.pool.getConnection();
+				//var dbData = (await conn.query("SELECT * from SERVERS WHERE SERVER_ID = " + element.guildID + " LIMIT 1"))[0].COMPAT
+				//conn.release();}
 				var dbData = (await new sql.Request(global.pool).query('SELECT TOP 1 * from SERVERS WHERE SERVER_ID = ' + element.guildID)).recordset[0].COMPAT
 				if (await compat.check(pingResults, JSON.parse(dbData))){throw stringJSON.status.compatOffline;};
 				global.statusCache.set(element.ip, {online: true, data: pingResults})}
@@ -43,8 +46,8 @@ return new Promise(async(resolve, reject) => {
 				}, stringJSON);
 			}
 		}
-			if(!isEqual({title: statEmbed.title.toString(), description: statEmbed.description.toString(), fields: statEmbed.fields, footer: statEmbed.footer.text.toString()},
-			{title: element.lastState.title.toString(), description: element.lastState.description.toString(), fields: element.lastState.fields, footer: element.lastState.footer.text.toString()}))
+			if(!isEqual(JSON.stringify({title: statEmbed.title, description: statEmbed.description, fields: statEmbed.fields, footer: statEmbed.footer}),
+			JSON.stringify({title: element.lastState.title, description: element.lastState.description, fields: element.lastState.fields, footer: element.lastState.footer})))
 			{resolve ({update: true, data: statEmbed, disable: disable})}
 			else {resolve ({update: false, disable: disable});}
 	}
